@@ -106,13 +106,13 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li> <a class="dropdown-item" href="../view/cadastroPedido.php"> Cadastro </a> </li>
 
-                            <li> <a class="dropdown-item" href="#"> Visualizar </a> </li>
+                            <li> <a class="dropdown-item" href="../view/listaPedido.php"> Visualizar </a> </li>
 
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
 
-                            <li> <a class="dropdown-item" href="#"> Busca por código </a> </li>
+                            <li> <a class="dropdown-item" href="../view/listaPedidoCod.php"> Busca por código </a> </li>
 
                         </ul>
 

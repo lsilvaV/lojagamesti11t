@@ -63,17 +63,14 @@
 
     <?php
         $codJogo= isset($_POST["codJogo"])?$_POST["codJogo"]:"0";
-        $jogo = isset($codJogo)?listaJogoCod($conexao, $codJogo):"";
-        $_SESSION["codigoJogo"] = isset($jogo["codJogo"])?$jogo["codJogo"]:"0";
-        $_SESSION["nomeJogo"] = isset($jogo["nomeJog"])?$jogo["nomeJog"]:"";
-        $_SESSION["precoJogo"] = isset($jogo["precoJog"])?$jogo["precoJog"]:"";
+
     ?>
 
     <div class="col-md-2">
         <label for="inputJog" class="form-label"> Código </label>
         <form method="POST" action="cadastroPedido.php">
             <div class="d-grid gap-3 d-md-flex justify-content-md-end">
-                <input type="text" value="<?=$_SESSION["codigoJogo"]?>" class="form-control" id="inputJog" required name="codJogo">
+                <input type="text" value="<?=$codJogo?>" class="form-control" id="inputJog" required name="codJogo">
                 <input type="hidden" value="<?=$_SESSION['codigoCliente']?>" name="codCliente">
                 <input type="hidden" value="<?=$_SESSION['nomeCliente']?>" name="nomeCliente">
 
@@ -85,6 +82,13 @@
 
         </form>
 
+    <?php
+        $jogo = isset($codJogo)?listaJogoCod($conexao, $codJogo):"";
+        $_SESSION["codigoJogo"] = isset($jogo["codJogo"])?$jogo["codJogo"]:"0";
+        $_SESSION["nomeJogo"] = isset($jogo["nomeJog"])?$jogo["nomeJog"]:"";
+        $_SESSION["precoJogo"] = isset($jogo["precoJog"])?$jogo["precoJog"]:"";
+    ?>
+
     </div>
 
     <div class="col-md-9">
@@ -92,37 +96,26 @@
         <input type="text" value="<?=$_SESSION["nomeJogo"]?>" readonly class="form-control" id="inputNomeJog">
     </div>
 
-    <div class="col-md-4">
-        <label for="inputQtd" class="form-label"> Quantidade </label>
-        <select id="inputQtd" class="form-select">
-            <option selected> Escolha a quantidade </option>
-            <option> 1 </option>
-            <option> 2 </option>
-            <option> 3 </option>
-            <option> 4 </option>
-            <option> 5 </option>
-            <option> 6 </option>
-            <option> 7 </option>
-            <option> 8 </option>
-            <option> 9 </option>
-            <option> 10 </option>
-        </select>
-  </div>
-
-    <div class="col-md-4">
+    <div class="col-11">
         <label for="inputValorU" class="form-label"> Valor Unitário </label>
         <input type="text" class="form-control" value="<?=$_SESSION["precoJogo"]?>" readonly id="inputValorU">
     </div>
 
-    <div class="col-md-3">
-        <label for="inputValorT" class="form-label"> Valor Total </label>
-        <input type="text" class="form-control" id="inputValorT">
-    </div>
+    <form method="POST" action="../controller/inserirPedido.php">
+        <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+            <input type="hidden" value="<?=$codJogo?>" name="codJogFK">
+            <input type="hidden" value="<?=$_SESSION['codigoCliente']?>" name="codCliFK">
+            <input type="hidden" value="<?php echo($funcionario["codFun"])?>" name="codFunFK">
+            <input type="hidden" value="<?=$_SESSION['precoJogo']?>" name="valorUnit">
 
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary"> Buscar </button>
-    </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary"> Confirmar </button>
+            </div>
 
+        </div>
+
+    </form>
+    
 </div>
 
 <?php include("footer.php"); ?>
